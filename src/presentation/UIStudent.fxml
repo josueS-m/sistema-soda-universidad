@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #fecaca;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="53.0" prefWidth="1024.0" styleClass="inner_pane" stylesheets="@../business/application.css">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/icons8-signing-a-document-50.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="78.0" text="Gestión de estudiantes" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="10.0" layoutY="65.0" prefHeight="695.0" prefWidth="1005.0" style="-fx-background-color: #fff;">
+         <children>
+            <Pane prefHeight="59.0" prefWidth="1005.0">
+               <children>
+                  <HBox prefHeight="60.0" prefWidth="1005.0" spacing="30.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #9ca3af, #f9fafb);">
+                     <children>
+                        <Button fx:id="btnAddStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Agregar" textFill="#1e1e1e">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons8-add-male-user-26.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnEditStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Editar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons8-create-26.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="btnDeleteStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Eliminar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons8-trash-can-26.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="btnConsultStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Consultar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/icons8-search-contacts-26.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="pAddStudent" layoutY="59.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);">
+               <children>
+                  <Label layoutX="421.0" layoutY="14.0" text="Agregar estudiante">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="228.0" layoutY="84.0" prefHeight="191.0" prefWidth="274.0">
+                     <children>
+                        <Label text="Carné" />
+                        <TextField fx:id="tfIdStudent" />
+                        <Label text="Correo Electrónico" />
+                        <TextField fx:id="tfEmail" />
+                        <Label text="Género" />
+                        <ComboBox fx:id="cxGender" prefHeight="25.0" prefWidth="261.0" />
+                        <Label text="Fecha de Ingreso" />
+                        <DatePicker fx:id="dpDateofEntry" prefHeight="25.0" prefWidth="192.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="525.0" layoutY="84.0" prefHeight="185.0" prefWidth="274.0">
+                     <children>
+                        <Label text="Nombre" />
+                        <TextField fx:id="tfName" />
+                        <Label text="Teléfono" />
+                        <TextField fx:id="tfTelephone" />
+                        <Label text="Estado del Estudiante" />
+                        <ComboBox fx:id="cxStateStudent" prefHeight="25.0" prefWidth="263.0" />
+                        <Label text="Dinero Disponible" />
+                        <TextField fx:id="tfMoneyAvailable" prefHeight="25.0" prefWidth="499.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

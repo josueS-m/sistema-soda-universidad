@@ -1,1 +1,37 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.side_pane {
+	-fx-background-color: #e03131;	
+	-fx-border-width: 2px 2px 2px 2px;
+	-fx-border-radius: 20px;
+	-fx-background-radius: 20px;
+	-fx-border-style: solid;
+	-fx-border-color: #fa5252;	
+}
+
+.inner_pane {
+	-fx-background-color: #020617;	
+	-fx-border-width: 2px 2px 2px 2px;
+	-fx-border-radius: 20px;
+	-fx-background-radius: 10px;
+	-fx-border-style: none ;	
+}
+
+.border-bottom {   	
+    -fx-border-style: none;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 10px;    
+    -fx-border-insets: 0 0 1px 0; 
+}
+
+.background-gradient {    
+    -fx-background-color:  linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);
+     
+}
+
+.background-radial-gradient {
+    -fx-background-color: radial-gradient(radius 50%, #ff7e5f, #feb47b);
+}
+
+
+
