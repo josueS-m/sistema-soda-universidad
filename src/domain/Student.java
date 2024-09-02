@@ -11,7 +11,7 @@ public class Student extends Person{
 	
 	
 
-	public Student(String name, String email, int telephone, char gender, String idStudent, boolean isActive,
+	public Student(String idStudent, String name, String email, int telephone, char gender, boolean isActive,
 			LocalDate dateOfEntry, double moneyAvailable) {
 		super(name, email, telephone, gender);
 		this.idStudent = idStudent;

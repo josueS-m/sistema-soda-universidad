@@ -21,13 +21,17 @@ public class JsonUtils <T> {
 		this.filePath = route;
 	}
 	
-	public void saveElement(T t) throws IOException {
-		
+	@SuppressWarnings("unchecked")
+	public void saveElement(T t) throws IOException {		
 		List<T> temp = getElements((Class<T>) t.getClass());
 		
 		temp.add(t);
 		mapper.writeValue(new File(filePath), temp);
 	}
+	
+	public void saveAllElements(List<T> temp) throws IOException {
+		mapper.writeValue(new File(filePath), temp);
+    }
 	
 	public List<T> getElements(Class<T> temp) throws IOException {
 		File file = new File(filePath);
@@ -40,4 +44,26 @@ public class JsonUtils <T> {
 				.constructCollectionType(List.class, temp)
 				);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void editElements(T t) throws IOException {
+		List<T> elements = getElements(((Class<T>) t.getClass()));
+		
+		for(int i = 0; i < elements.size(); i++) {
+			T currentElement = elements.get(i);
+			
+			if(currentElement.equals(t)) {
+				elements.set(i, t);
+				break;
+			}
+		}		
+		mapper.writeValue(new File(filePath), elements);
+	}  
+	
+	@SuppressWarnings("unchecked")
+	public void removeElement(T t) throws IOException {
+        List<T> temp = getElements(((Class<T>) t.getClass()));        
+        temp.remove(t);  
+        mapper.writeValue(new File(filePath), temp);
+    }
 }

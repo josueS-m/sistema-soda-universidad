@@ -6,10 +6,12 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,226 +20,339 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: fafafa;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane prefHeight="53.0" prefWidth="1024.0" styleClass="inner_pane" stylesheets="@../business/application.css">
-         <children>
-            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/icons8-signing-a-document-50.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="78.0" text="Gestión de estudiantes" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutX="10.0" layoutY="65.0" prefHeight="695.0" prefWidth="1005.0" style="-fx-background-color: #fff;">
-         <children>
-            <Pane fx:id="pOptionCRUD" prefHeight="59.0" prefWidth="1005.0">
-               <children>
-                  <HBox prefHeight="60.0" prefWidth="1005.0" spacing="30.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #9ca3af, #f9fafb);" styleClass="border-bottom" stylesheets="@../business/application.css">
-                     <children>
-                        <Button fx:id="btnAddStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Agregar" textFill="#1e1e1e">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons8-add-male-user-26.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: fafafa;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.UIStudentController">
+	<children>
+		<Pane layoutX="1.0" prefHeight="53.0" prefWidth="1024.0" styleClass="inner_pane" stylesheets="@../business/application.css">
+			<children>
+				<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../images/icons8-signing-a-document-50.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="78.0" text="Gestión de estudiantes" textFill="WHITE">
+					<font>
+						<Font name="System Bold" size="36.0" />
+					</font>
+				</Label>
+			</children>
+		</Pane>
+		<Pane layoutX="10.0" layoutY="65.0" prefHeight="695.0" prefWidth="1005.0" style="-fx-background-color: #fff;">
+			<children>
+				<Pane fx:id="pOptionCRUD" prefHeight="59.0" prefWidth="1005.0">
+					<children>
+						<HBox prefHeight="60.0" prefWidth="1005.0" spacing="30.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #9ca3af, #f9fafb);" styleClass="border-bottom" stylesheets="@../business/application.css">
+							<children>
+								<Button fx:id="btnAddStudent" mnemonicParsing="false" onAction="#HandleAddPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Agregar" textFill="#1e1e1e">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+									<graphic>
+										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../images/icons8-add-male-user-26.png" />
+											</image>
+										</ImageView>
+									</graphic>
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</Button>
+								<Button fx:id="btnEditStudent" mnemonicParsing="false" onAction="#handleEditPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Editar">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+									<graphic>
+										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../images/icons8-create-26.png" />
+											</image>
+										</ImageView>
+									</graphic>
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</Button>
+								<Button fx:id="btnDeleteStudent" mnemonicParsing="false" onAction="#handleDeletePane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Eliminar">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+									<graphic>
+										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../images/icons8-trash-can-26.png" />
+											</image>
+										</ImageView>
+									</graphic>
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</Button>
+								<Button fx:id="btnConsultStudent" mnemonicParsing="false" onAction="#handleConsultPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Consultar">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+									<graphic>
+										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../images/icons8-search-contacts-26.png" />
+											</image>
+										</ImageView>
+									</graphic>
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</Button>
+								<Button fx:id="btnShowAll" mnemonicParsing="false" onAction="#handleShowPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Mostrar ">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+									<graphic>
+										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../images/icons8-show-property-26.png" />
+											</image>
+										</ImageView>
+									</graphic>
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</Button>
+                        <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 10px; -fx-background-color: #fff;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <graphic>
+                  				<ImageView fitHeight="26.0" fitWidth="26.0" onMouseClicked="#handleBack" pickOnBounds="true" preserveRatio="true">
+                  					<image>
+                  						<Image url="@../images/icons8-return-24.png" />
+                  					</image>
+                  					<cursor>
+                  						<Cursor fx:constant="HAND" />
+                  					</cursor>
+                  				</ImageView>
+                           </graphic>
                         </Button>
-                        <Button fx:id="btnEditStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Editar">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons8-create-26.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="btnDeleteStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Eliminar">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons8-trash-can-26.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <Button fx:id="btnConsultStudent" mnemonicParsing="false" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Consultar">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/icons8-search-contacts-26.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
+							</children>
+							<padding>
+								<Insets left="10.0" top="10.0" />
+							</padding>
+						</HBox>
+					</children>
+				</Pane>
+			</children>
+		</Pane>
+		<Pane fx:id="pAddStudent" layoutX="10.0" layoutY="120.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
+			<children>
+				<Label layoutX="394.0" layoutY="14.0" text="Agregar estudiante">
+					<font>
+						<Font name="System Bold" size="24.0" />
+					</font>
+				</Label>
+				<VBox layoutX="120.0" layoutY="107.0" prefHeight="191.0" prefWidth="274.0" spacing="20.0">
+					<children>
+						<Label text="Carné" />
+						<TextField fx:id="tfIdStudent" promptText="Ingresar carné de estudiante" />
+						<Label text="Correo Electrónico" />
+						<TextField fx:id="tfEmail" promptText="Ingresar correo electronico" />
+						<Label text="Género" />
+						<ComboBox fx:id="cxGender" onShowing="#fillCXGender" prefHeight="25.0" prefWidth="272.0" promptText="Seleccionar género: " />
+						<Label text="Fecha de Ingreso" />
+						<DatePicker fx:id="dpDateofEntry" prefHeight="25.0" prefWidth="192.0" promptText="Seleccionar fecha de ingreso del estudiante" />
+					</children>
+				</VBox>
+				<VBox layoutX="559.0" layoutY="107.0" prefHeight="342.0" prefWidth="305.0" spacing="20.0">
+					<children>
+						<Label text="Nombre" />
+						<TextField fx:id="tfName" promptText="Ingresar nombre de estudiante" />
+						<Label text="Teléfono" />
+						<TextField fx:id="tfTelephone" promptText="Ingresar numero de telefono">
+                     <VBox.margin>
+                        <Insets right="115.0" />
+                     </VBox.margin>
+                  </TextField>
+						<Label text="Estado del Estudiante" />
+                  <HBox prefHeight="26.0" prefWidth="190.0" spacing="20.0">
+                     <children>
+                        <RadioButton fx:id="rbActive" mnemonicParsing="false" selected="true" text="Activo ">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="isActive" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbNoActive" mnemonicParsing="false" text="No activo" toggleGroup="$isActive" />
                      </children>
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding>
                   </HBox>
-               </children>
-            </Pane>
-            <Pane fx:id="pAddStudent" layoutY="59.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
-               <children>
-                  <Label layoutX="421.0" layoutY="14.0" text="Agregar estudiante">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="228.0" layoutY="84.0" prefHeight="191.0" prefWidth="274.0">
+						<Label text="Dinero Disponible" />
+						<TextField fx:id="tfMoneyAvailable" prefHeight="25.0" prefWidth="499.0" promptText="Ingresar dinero disponible" />
+					</children>
+				</VBox>
+				<Button fx:id="btnAdd" layoutX="120.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleAddStudent" style="-fx-background-radius: 10px;" text="Agregar" textFill="#1e1e1e">
+					<font>
+						<Font name="System Bold" size="13.0" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../images/icons8-add-22.png" />
+							</image>
+						</ImageView>
+					</graphic>
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
+				</Button>
+				<Separator layoutY="-1.0" prefWidth="1005.0" />
+			</children>
+		</Pane>
+		<Pane fx:id="pEditStudent" layoutX="10.0" layoutY="118.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);">
+			<children>
+				<Label layoutX="421.0" layoutY="14.0" text="Editar estudiante">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</Label>
+				<VBox layoutX="151.0" layoutY="79.0" prefHeight="190.0" prefWidth="280.0" spacing="20.0">
+					<children>
+						<Label text="Carné" />
+						<TextField fx:id="tfIdEdit" promptText="Ingresar carné del estudiante" />
+						<Label text="Teléfono" />
+						<TextField fx:id="tfTelephoneEdit" promptText="p. ej., 1234 5678" />
+						<Label text="Género" />
+						<ComboBox fx:id="cxGenderEdit" prefHeight="25.0" prefWidth="261.0" promptText="Seleccionar:" />
+						<Label text="Fecha de Ingreso" />
+						<DatePicker fx:id="dpDateofEntryEdit" prefHeight="25.0" prefWidth="192.0" promptText="Seleccionar fecha de ingreso" />
+					</children>
+				</VBox>
+				<VBox layoutX="503.0" layoutY="80.0" prefHeight="305.0" prefWidth="478.0" spacing="20.0">
+					<children>
+						<Label text="Nombre" />
+						<TextField fx:id="tfNameEdit" promptText="Ingresar nombre del estudiante" />
+						<Label text="Correo Electrónico" />
+						<TextField fx:id="tfEmailEdit" promptText="p. ej., correo@gmail.com" />
+						<Label text="Estado del Estudiante" />
+                  <HBox prefHeight="26.0" prefWidth="190.0" spacing="20.0">
                      <children>
-                        <Label text="Carné" />
-                        <TextField fx:id="tfIdStudent" />
-                        <Label text="Correo Electrónico" />
-                        <TextField fx:id="tfEmail" />
-                        <Label text="Género" />
-                        <ComboBox fx:id="cxGender" prefHeight="25.0" prefWidth="261.0" />
-                        <Label text="Fecha de Ingreso" />
-                        <DatePicker fx:id="dpDateofEntry" prefHeight="25.0" prefWidth="192.0" />
+                        <RadioButton fx:id="rbActiveEdit" mnemonicParsing="false" selected="true" text="Activo ">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="isActive1" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbNoActiveedit" mnemonicParsing="false" text="No activo" toggleGroup="$isActive1" />
                      </children>
-                  </VBox>
-                  <VBox layoutX="525.0" layoutY="84.0" prefHeight="185.0" prefWidth="274.0">
-                     <children>
-                        <Label text="Nombre" />
-                        <TextField fx:id="tfName" />
-                        <Label text="Teléfono" />
-                        <TextField fx:id="tfTelephone" />
-                        <Label text="Estado del Estudiante" />
-                        <ComboBox fx:id="cxStateStudent" prefHeight="25.0" prefWidth="263.0" />
-                        <Label text="Dinero Disponible" />
-                        <TextField fx:id="tfMoneyAvailable" prefHeight="25.0" prefWidth="499.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-      <Pane fx:id="pEditStudent" layoutX="10.0" layoutY="118.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
-         <children>
-            <Label layoutX="421.0" layoutY="14.0" text="Editar estudiante">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <VBox layoutX="228.0" layoutY="84.0" prefHeight="191.0" prefWidth="274.0">
-               <children>
-                  <Label text="Carné" />
-                  <TextField fx:id="tfIdStudent1" />
-                  <Label text="Correo Electrónico" />
-                  <TextField fx:id="tfEmail1" />
-                  <Label text="Género" />
-                  <ComboBox fx:id="cxGender1" prefHeight="25.0" prefWidth="261.0" />
-                  <Label text="Fecha de Ingreso" />
-                  <DatePicker fx:id="dpDateofEntry1" prefHeight="25.0" prefWidth="192.0" />
-               </children>
-            </VBox>
-            <VBox layoutX="525.0" layoutY="84.0" prefHeight="185.0" prefWidth="274.0">
-               <children>
-                  <Label text="Nombre" />
-                  <TextField fx:id="tfName1" />
-                  <Label text="Teléfono" />
-                  <TextField fx:id="tfTelephone1" />
-                  <Label text="Estado del Estudiante" />
-                  <ComboBox fx:id="cxStateStudent1" prefHeight="25.0" prefWidth="263.0" />
-                  <Label text="Dinero Disponible" />
-                  <TextField fx:id="tfMoneyAvailable1" prefHeight="25.0" prefWidth="499.0" />
-               </children>
-            </VBox>
-         </children>
-      </Pane>
-      <Pane fx:id="pDeleteStudent" layoutX="10.0" layoutY="120.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
-         <children>
-            <Label layoutX="421.0" layoutY="14.0" text="Eliminar Estudiante">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TableView layoutX="121.0" layoutY="77.0" prefHeight="551.0" prefWidth="763.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Carné" />
-                <TableColumn prefWidth="75.0" text="Nombre" />
-                  <TableColumn prefWidth="125.0" text="Correo Electrónico" />
-                  <TableColumn prefWidth="71.0" text="Teléfono" />
-                  <TableColumn prefWidth="54.0" text="Activo" />
-                  <TableColumn prefWidth="143.0" text="Fecha de Ingreso" />
-                  <TableColumn prefWidth="74.0" text="Género" />
-                  <TableColumn prefWidth="132.0" text="Disnero Disponible" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <Separator layoutY="45.0" prefWidth="1005.0" />
-         </children>
-      </Pane>
-      <Pane fx:id="pDeleteStudent1" layoutX="10.0" layoutY="118.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);">
-         <children>
-            <Label layoutX="421.0" layoutY="14.0" text="Consultar Estudiante">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TableView layoutY="110.0" prefHeight="532.0" prefWidth="1005.0">
-               <columns>
-                  <TableColumn prefWidth="107.0" text="Carné" />
-                  <TableColumn prefWidth="239.0" text="Nombre" />
-                  <TableColumn prefWidth="185.0" text="Correo Electrónico" />
-                  <TableColumn minWidth="4.0" prefWidth="111.0" text="Teléfono" />
-                  <TableColumn prefWidth="53.0" text="Activo" />
-                  <TableColumn prefWidth="107.0" text="Fecha de Ingreso" />
-                  <TableColumn minWidth="0.0" prefWidth="54.0" text="Género" />
-                  <TableColumn prefWidth="121.0" text="Disnero Disponible" />
-               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <Separator layoutY="45.0" prefWidth="1005.0" />
-            <TextField fx:id="tfSearchStudent" layoutX="49.0" layoutY="78.0" prefHeight="25.0" prefWidth="216.0" promptText="Ingrese el carné del estudiante" />
-            <ImageView fx:id="btnBack" fitHeight="26.0" fitWidth="26.0" layoutX="965.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/icons8-return-24.png" />
-               </image>
+                  </HBox>
+						<Label text="Dinero Disponible" />
+						<TextField fx:id="tfMoneyAvailableEdit" prefHeight="25.0" prefWidth="499.0" promptText="Ingresar el dinero disponible">
+                     <VBox.margin>
+                        <Insets right="280.0" />
+                     </VBox.margin>
+                  </TextField>
+					</children>
+				</VBox>
+				<Button fx:id="btnEdit" layoutX="151.0" layoutY="486.0" mnemonicParsing="false" onAction="#handleEditStudent" style="-fx-background-radius: 10px;" text="Editar">
+					<font>
+						<Font name="System Bold" size="13.0" />
+					</font>
+					<graphic>
+						<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../images/icons8-edit-20.png" />
+							</image>
+						</ImageView>
+					</graphic>
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
+				</Button>
+			</children>
+		</Pane>
+		<Pane fx:id="pConsultStudent" layoutX="10.0" layoutY="118.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
+			<children>
+				<Label layoutX="421.0" layoutY="14.0" text="Consultar Estudiante">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</Label>
+				<TableView fx:id="tvDataStudent" layoutY="110.0" prefHeight="532.0" prefWidth="1005.0">
+					<columns>
+						<TableColumn prefWidth="107.0" text="Carné" />
+						<TableColumn prefWidth="239.0" text="Nombre" />
+						<TableColumn prefWidth="185.0" text="Correo Electrónico" />
+						<TableColumn minWidth="4.0" prefWidth="111.0" text="Teléfono" />
+						<TableColumn prefWidth="53.0" text="Activo" />
+						<TableColumn prefWidth="107.0" text="Fecha de Ingreso" />
+						<TableColumn minWidth="0.0" prefWidth="54.0" text="Género" />
+						<TableColumn prefWidth="121.0" text="Disnero Disponible" />
+					</columns>
+					<columnResizePolicy>
+						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+					</columnResizePolicy>
+				</TableView>
+				<Separator layoutY="45.0" prefWidth="1005.0" />
+				<TextField fx:id="tfSearchStudent" layoutX="65.0" layoutY="65.0" prefHeight="25.0" prefWidth="216.0" promptText="Ingrese el carné del estudiante" />
+				<ImageView fx:id="btnPDeleteStudent" fitHeight="26.0" fitWidth="26.0" layoutX="270.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" visible="false">
+					<image>
+						<Image url="@../images/icons8-trash-can-26.png" />
+					</image>
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
+				</ImageView>
+            <Button fx:id="btnSearchStudent" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 10px; -fx-background-color: #fff;">
+               <graphic>
+      				<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+      					<image>
+      						<Image url="@../images/icons8-search-client-24.png" />
+      					</image>
+      					<cursor>
+      						<Cursor fx:constant="HAND" />
+      					</cursor>
+      				</ImageView>
+               </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView fx:id="btnSearchStudent" fitHeight="26.0" fitWidth="26.0" layoutX="14.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/icons8-search-client-24.png" />
-               </image>
+            </Button>
+			</children>
+		</Pane>
+		<Pane fx:id="pDeleteStudent" layoutX="9.0" layoutY="126.0" prefHeight="642.0" prefWidth="1005.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
+			<children>
+				<Label layoutX="421.0" layoutY="14.0" text="Eliminar Estudiante">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</Label>
+				<Separator layoutY="45.0" prefWidth="1005.0" />
+				<TableView fx:id="tvDataStudentDelete" layoutY="100.0" prefHeight="532.0" prefWidth="1005.0">
+					<columns>
+						<TableColumn prefWidth="107.0" text="Carné" />
+						<TableColumn prefWidth="239.0" text="Nombre" />
+						<TableColumn prefWidth="185.0" text="Correo Electrónico" />
+						<TableColumn minWidth="4.0" prefWidth="111.0" text="Teléfono" />
+						<TableColumn prefWidth="53.0" text="Activo" />
+						<TableColumn prefWidth="107.0" text="Fecha de Ingreso" />
+						<TableColumn minWidth="0.0" prefWidth="54.0" text="Género" />
+						<TableColumn prefWidth="121.0" text="Disnero Disponible" />
+					</columns>
+					<columnResizePolicy>
+						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+					</columnResizePolicy>
+				</TableView>
+				<TextField fx:id="tfSearchToDelete" layoutX="67.0" layoutY="59.0" prefHeight="25.0" prefWidth="175.0" promptText="Ingresar carné para eliminar" />
+            <Button fx:id="btnDelete" layoutX="15.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleDeleteStudent" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 10px; -fx-background-color: #fff;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-         </children>
-      </Pane>
-   </children>
+               <graphic>
+      				<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+      					<image>
+      						<Image url="@../images/icons8-delete-24.png" />
+      					</image>
+      					<cursor>
+      						<Cursor fx:constant="HAND" />
+      					</cursor>
+      				</ImageView>
+               </graphic>
+            </Button>
+			</children>
+		</Pane>
+	</children>
 </AnchorPane>
