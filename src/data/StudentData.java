@@ -68,5 +68,34 @@ public class StudentData {
 		}
 		return false;
 	}
+	
+	public static Student getStudentById(String idStudent) {
+	    List<Student> students = getStudentList();
+	    for (Student student : students) {
+	        if (student.getIdStudent().equals(idStudent)) {
+	            return student;
+	        }
+	    }
+	    return null; 
+	}
+	
+	public static boolean updateStudentBalance(Student updatedStudent) {
+	    List<Student> students = getStudentList();
+	    for (int i = 0; i < students.size(); i++) {
+	        if (students.get(i).getIdStudent().equals(updatedStudent.getIdStudent())) {
+	            students.set(i, updatedStudent);
+	            try {
+	                jsonUtils.saveElements(students); 
+	                return true;
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+	        }
+	    }
+	    return false;
+	}
+
+
 
 }

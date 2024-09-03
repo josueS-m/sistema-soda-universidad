@@ -20,7 +20,7 @@ public class JsonUtils <T> {
 	public JsonUtils(String route) {
 		this.filePath = route;
 	}
-	
+		
 	@SuppressWarnings("unchecked")
 	public void saveElement(T t) throws IOException {		
 		List<T> temp = getElements((Class<T>) t.getClass());
@@ -32,6 +32,12 @@ public class JsonUtils <T> {
 	public void saveAllElements(List<T> temp) throws IOException {
 		mapper.writeValue(new File(filePath), temp);
     }
+	
+	public void saveElements(List<T> elements) throws IOException {
+	    ObjectMapper mapper = new ObjectMapper();
+	    mapper.writeValue(new File(filePath), elements);
+	}
+
 	
 	public List<T> getElements(Class<T> temp) throws IOException {
 		File file = new File(filePath);
@@ -58,7 +64,7 @@ public class JsonUtils <T> {
 			}
 		}		
 		mapper.writeValue(new File(filePath), elements);
-	}  
+	} 
 	
 	@SuppressWarnings("unchecked")
 	public void removeElement(T t) throws IOException {

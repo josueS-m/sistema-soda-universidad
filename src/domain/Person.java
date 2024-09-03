@@ -6,6 +6,8 @@ public class Person {
 	protected String email;
 	protected int telephone;
 	protected char gender;
+	
+	public Person() {}
 
 	public Person(String name, String email, int telephone, char gender) {
 		super();

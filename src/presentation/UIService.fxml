@@ -1,8 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="960.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.UIServiceController">
+	<children>
+		<Pane layoutX="15.0" layoutY="76.0" prefHeight="52.0" prefWidth="926.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #9ca3af, #f9fafb);" styleClass="border-bottom" stylesheets="@../business/application.css">
+			<children>
+				<HBox layoutX="20.0" layoutY="2.0" prefHeight="48.0" prefWidth="676.0" spacing="40.0">
+					<padding>
+						<Insets top="5.0" />
+					</padding>
+               <children>
+            						<Button fx:id="btnAddService" mnemonicParsing="false" onAction="#handleAddRegisterPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Agregar servicio" textFill="#1e1e1e">
+            							<font>
+            								<Font name="System Bold" size="13.0" />
+            							</font>
+            							<graphic>
+            								<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+            									<image>
+            										<Image url="@../images/icons8-tableware-26.png" />
+            									</image>
+            								</ImageView>
+            							</graphic>
+            							<cursor>
+            								<Cursor fx:constant="HAND" />
+            							</cursor>
+            						</Button>
+            						<Button fx:id="btnServiceRequest" mnemonicParsing="false" onAction="#handleServiceRequest" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Solicitar servicio" textFill="#1e1e1e">
+            							<font>
+            								<Font name="System Bold" size="13.0" />
+            							</font>
+            							<graphic>
+            								<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            									<image>
+            										<Image url="@../images/icons8-request-24.png" />
+            									</image>
+            								</ImageView>
+            							</graphic>
+            							<cursor>
+            								<Cursor fx:constant="HAND" />
+            							</cursor>
+            						</Button>
+               </children>
+				</HBox>
+			</children>
+		</Pane>
+		<Pane layoutX="1.0" prefHeight="60.0" prefWidth="960.0" style="-fx-background-color: #0f172a;" styleClass="border-bottom" stylesheets="@../business/application.css">
+			<children>
+				<HBox prefHeight="50.0" prefWidth="390.0" spacing="20.0">
+					<children>
+						<ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../images/icons8-restaurant-48.png" />
+							</image>
+							<viewport>
+								<Rectangle2D />
+							</viewport>
+							<HBox.margin>
+								<Insets left="5.0" />
+							</HBox.margin>
+						</ImageView>
+						<Label text="Gestión de Servicios" textFill="WHITE">
+							<font>
+								<Font name="Serif Bold" size="36.0" />
+							</font>
+							<padding>
+								<Insets top="9.0" />
+							</padding>
+						</Label>
+					</children>
+				</HBox>
+			</children>
+		</Pane>
+		<Pane fx:id="pRequestFoodService" layoutX="15.0" layoutY="125.0" prefHeight="566.0" prefWidth="926.0" style="-fx-border-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);">
+			<children>
+				<HBox layoutX="14.0" layoutY="105.0" prefHeight="100.0" prefWidth="915.0" spacing="81.0">
+					<children>
+						<VBox prefHeight="100.0" prefWidth="368.0" spacing="15.0">
+							<children>
+								<Label text="Estudiante">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+								</Label>
+								<ComboBox fx:id="cxStudent" prefHeight="25.0" prefWidth="269.0" promptText="Seleccionar el estudiante:" />
+							</children>
+						</VBox>
+						<VBox prefHeight="100.0" prefWidth="293.0" spacing="15.0">
+							<children>
+								<Label text="Seleccionar día para reservar">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+								</Label>
+								<ComboBox fx:id="cxReservationDay" prefHeight="25.0" prefWidth="217.0" promptText="Seleccionar el día de reserva: " />
+							</children>
+						</VBox>
+						<VBox prefHeight="100.0" prefWidth="352.0" spacing="15.0">
+							<children>
+								<Label text="Horario de la reserva">
+									<font>
+										<Font name="System Bold" size="13.0" />
+									</font>
+								</Label>
+								<HBox prefHeight="66.0" prefWidth="185.0" spacing="20.0">
+									<children>
+										<RadioButton fx:id="rbBreakfastRequest" mnemonicParsing="false" selected="true" text="Desayuno">
+											<toggleGroup>
+												<ToggleGroup fx:id="reservation" />
+											</toggleGroup>
+										</RadioButton>
+										<RadioButton fx:id="rbLunchRequest" mnemonicParsing="false" text="Almuerzo" toggleGroup="$reservation" />
+									</children>
+								</HBox>
+							</children>
+						</VBox>
+					</children>
+				</HBox>
+				<TableView fx:id="tvDataNewServiceStudent" layoutX="14.0" layoutY="219.0" prefHeight="200.0" prefWidth="627.0" tableMenuButtonVisible="true">
+					<columns>
+						<TableColumn fx:id="tcServiceName" prefWidth="428.0" text="Alimento" />
+						<TableColumn fx:id="tcServicePrice" prefWidth="102.0" text="Precio" />
+						<TableColumn fx:id="tcSelectService" prefWidth="96.0" text="Solicitar" />
+					</columns>
+				</TableView>
+				<Separator layoutX="15.0" layoutY="206.0" prefWidth="900.0" />
+				<HBox layoutX="410.0" layoutY="429.0" prefHeight="33.0" prefWidth="237.0" spacing="20.0">
+					<children>
+						<Button fx:id="btnBackMenu" mnemonicParsing="false" onAction="#handleBackMenu" text="Regresar" />
+						<Button fx:id="btnAddFood" mnemonicParsing="false" onAction="#handleAddFoodService" text="Agregar nuevo alimento" />
+					</children>
+				</HBox>
+				<Pane layoutX="14.0" prefHeight="60.0" prefWidth="900.0">
+					<children>
+						<Label layoutX="337.0" layoutY="13.0" text="Solicitud de servicio">
+							<font>
+								<Font name="System Bold" size="24.0" />
+							</font>
+						</Label>
+					</children>
+				</Pane>
+            <Button fx:id="btnCheck" layoutX="684.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleShowDataSelect" stylesheets="@../business/application.css">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8-search-more-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="border-bottom" />
+                  <String fx:value="background-gradient" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnConfirmService" layoutX="684.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleConfirmService" stylesheets="@../business/application.css" text="Confirmar">
+               <styleClass>
+                  <String fx:value="border-bottom" />
+                  <String fx:value="background-gradient" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+			</children>
+		</Pane>
+		<Pane fx:id="pFoodRegisterForm" layoutX="17.0" layoutY="127.0" prefHeight="566.0" prefWidth="900.0" visible="false">
+			<children>
+				<VBox layoutX="308.0" layoutY="63.0" prefHeight="467.0" prefWidth="381.0" spacing="10.0">
+					<children>
+						<Label text="Formulario para regitro de alimentos">
+							<font>
+								<Font name="System Bold" size="12.0" />
+							</font>
+						</Label>
+						<Label text="Horario del servicio:" />
+						<HBox prefHeight="28.0" prefWidth="281.0" spacing="20.0">
+							<children>
+								<RadioButton fx:id="rbBreakfast" mnemonicParsing="false" selected="true" text="Desayuno">
+									<toggleGroup>
+										<ToggleGroup fx:id="serviceFood" />
+									</toggleGroup>
+								</RadioButton>
+								<RadioButton fx:id="rbLunch" mnemonicParsing="false" text="Almuerzo" toggleGroup="$serviceFood" />
+							</children>
+						</HBox>
+						<Label text="Día que aplica el servicio:" />
+						<ComboBox fx:id="cxServiceDay" prefHeight="25.0" prefWidth="170.0" promptText="Seleccione el día" />
+						<Label text="Nombre del servicio" />
+						<TextField fx:id="tfServiceName" promptText="p. ej., Gallo Pinto" />
+						<Label text="Precio del servicio" />
+						<TextField fx:id="tfPriceService" promptText="p. ej., 2500" />
+                  <Label fx:id="lError" prefHeight="100.0" prefWidth="361.0" textFill="#fc2525" />
+						<HBox prefHeight="72.0" prefWidth="170.0" spacing="134.0">
+							<children>
+								<Button fx:id="btnRegisterService" mnemonicParsing="false" onAction="#handleRegisterService" prefHeight="25.0" prefWidth="94.0" text="Registrar" />
+								<Button fx:id="btnBackToRequest" mnemonicParsing="false" onAction="#handleBackRequest" prefHeight="25.0" prefWidth="92.0" text="Regresar" />
+							</children>
+						</HBox>
+					</children>
+					<padding>
+						<Insets left="10.0" />
+					</padding>
+				</VBox>
+			</children>
+		</Pane>
+	</children>
 </AnchorPane>
-

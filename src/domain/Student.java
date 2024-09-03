@@ -8,9 +8,7 @@ public class Student extends Person{
 	private boolean isActive;
 	private LocalDate dateOfEntry;
 	private double moneyAvailable;
-	
-	
-
+			
 	public Student(String idStudent, String name, String email, int telephone, char gender, boolean isActive,
 			LocalDate dateOfEntry, double moneyAvailable) {
 		super(name, email, telephone, gender);
@@ -18,7 +16,9 @@ public class Student extends Person{
 		this.isActive = isActive;
 		this.dateOfEntry = dateOfEntry;
 		this.moneyAvailable = moneyAvailable;
-	}	
+	}		
+
+	public Student() {}
 
 	public String getIdStudent() {
 		return idStudent;
@@ -50,6 +50,18 @@ public class Student extends Person{
 
 	public void setMoneyAvailable(double moneyAvailable) {
 		this.moneyAvailable = moneyAvailable;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) {
+	        return true;
+	    }
+	    if (obj == null || getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    Student other = (Student) obj;
+	    return idStudent != null && idStudent.equals(other.idStudent);
 	}
 
 	@Override
