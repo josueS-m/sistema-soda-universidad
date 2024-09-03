@@ -113,8 +113,7 @@ public class UIServiceController {
 	public void loadServices(ActionEvent event) {
 		String selectedDay = cxReservationDay.getValue();
 	    String schedule = rbBreakfastRequest.isSelected() ? "Desayuno" : "Almuerzo";
-		
-		//se cargan los datos a la tabla 
+				
 		tcServiceName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 		tcServicePrice.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPrice()));
 		List<Service> services = ServiceData.getServicesByDayAndSchedule(selectedDay, schedule);
@@ -190,10 +189,10 @@ public class UIServiceController {
 	
 	@FXML
 	public void handleConfirmService(ActionEvent event) {
-	    // Obtener el servicio seleccionado
+		// Obtener el servicio seleccionado
 	    Service selectedService = tvDataNewServiceStudent.getSelectionModel().getSelectedItem();
 	    if (selectedService == null) {
-	        notify("Por favor, seleccione un servicio para solicitar.");
+	    	notifyWithDialog("Por favor, seleccione un servicio para solicitar.");
 	        return;
 	    }
 
@@ -201,28 +200,29 @@ public class UIServiceController {
 	    String selectedStudentId = cxStudent.getValue().split(" - ")[0];
 	    Student student = StudentData.getStudentById(selectedStudentId);
 	    if (student == null) {
-	        notify("Estudiante no encontrado.");
+	    	notifyWithDialog("Estudiante no encontrado.");
 	        return;
 	    }
 
 	    // Validar si el estudiante tiene suficiente saldo
 	    if (student.getMoneyAvailable() < selectedService.getPrice()) {
-	        notify("Saldo insuficiente para realizar la compra.");
+	    	notifyWithDialog("Saldo insuficiente para realizar la compra.");
 	        return;
 	    }
 
 	    // Actualizar el saldo del estudiante
-	    student.setMoneyAvailable(student.getMoneyAvailable() - selectedService.getPrice());
+	    double nuevoSaldo = student.getMoneyAvailable() - selectedService.getPrice();
+	    student.setMoneyAvailable(nuevoSaldo);
 	    boolean updateSuccess = StudentData.updateStudentBalance(student);
 
 	    if (updateSuccess) {
-	        notify("Compra realizada exitosamente. Nuevo saldo: " + student.getMoneyAvailable());
+	        notifyWithDialog("Compra realizada exitosamente. \nNuevo saldo: " + nuevoSaldo);
 	    } else {
-	        notify("Error al actualizar el saldo del estudiante.");
+	    	notifyWithDialog("Error al actualizar el saldo del estudiante.");
 	    }
 	}
-	// Event Listener on Button[#btnRegisterService].onAction
 	
+	// Event Listener on Button[#btnRegisterService].onAction	
 	@FXML
 	public boolean handleRegisterService(ActionEvent event) {
 		
@@ -313,6 +313,10 @@ public class UIServiceController {
 		timeline.setCycleCount(1);
 		timeline.play();
 	}
+	public void notifyWithDialog(String message) {
+	    JOptionPane.showMessageDialog(null, message, "Notificación", JOptionPane.INFORMATION_MESSAGE);
+	}
+
 	
 	public void closeWindows() {
 

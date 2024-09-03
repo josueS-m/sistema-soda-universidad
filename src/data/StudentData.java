@@ -23,12 +23,12 @@ public class StudentData {
 	}
 
 	public static String getStudentFormat(Student student) {
-
-		return "Carné: " + student.getIdStudent() + "\nEstudiante: " + student.getName() + "\nCorreo Electronico: "
-				+ student.getEmail() + "\nTelefono: " + student.getTelephone() + "\nGénero: "
-				+ ((student.getGender() == 'M') ? "Masculino" : "Femenino") + "\nFecha de ingreso: "
-				+ student.getDateOfEntry() + "\nDinero disponible: " + student.getMoneyAvailable();
-	}
+        return "Carné: " + student.getIdStudent() + "\nEstudiante: " + student.getName() +
+               "\nCorreo Electronico: " + student.getEmail() + "\nTelefono: " + student.getTelephone() +
+               "\nGénero: " + ((student.getGender() == 'M') ? "Masculino" : "Femenino") +
+               "\nFecha de ingreso: " + student.getDateOfEntry() +
+               "\nDinero disponible: " + student.getMoneyAvailable();
+    }
 	
 	public static boolean saveStudent(Student student) {
 		try {
@@ -80,22 +80,20 @@ public class StudentData {
 	}
 	
 	public static boolean updateStudentBalance(Student updatedStudent) {
-	    List<Student> students = getStudentList();
-	    for (int i = 0; i < students.size(); i++) {
-	        if (students.get(i).getIdStudent().equals(updatedStudent.getIdStudent())) {
-	            students.set(i, updatedStudent);
-	            try {
-	                jsonUtils.saveElements(students); 
-	                return true;
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	            }
-	            break;
-	        }
-	    }
-	    return false;
-	}
-
-
-
+        List<Student> students = getStudentList();
+        
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getIdStudent().equals(updatedStudent.getIdStudent())) {
+                students.set(i, updatedStudent);
+                try {
+                    jsonUtils.saveElements(students); 
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        return false;
+    }
 }

@@ -15,7 +15,7 @@ public class JsonUtils <T> {
 	
 	//Manejo de json
 	private static final ObjectMapper mapper = new ObjectMapper()
-			.registerModule(new JavaTimeModule());
+            .registerModule(new JavaTimeModule());
 	
 	public JsonUtils(String route) {
 		this.filePath = route;
@@ -33,8 +33,7 @@ public class JsonUtils <T> {
 		mapper.writeValue(new File(filePath), temp);
     }
 	
-	public void saveElements(List<T> elements) throws IOException {
-	    ObjectMapper mapper = new ObjectMapper();
+	public void saveElements(List<T> elements) throws IOException {	    
 	    mapper.writeValue(new File(filePath), elements);
 	}
 

@@ -91,7 +91,7 @@
 				</HBox>
 			</children>
 		</Pane>
-		<Pane fx:id="pRequestFoodService" layoutX="15.0" layoutY="125.0" prefHeight="566.0" prefWidth="926.0" style="-fx-border-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);">
+		<Pane fx:id="pRequestFoodService" layoutX="15.0" layoutY="125.0" prefHeight="566.0" prefWidth="926.0" style="-fx-border-color: linear-gradient(from 0% 0% to 0% 100%, #f9fafb, #9ca3af);" visible="false">
 			<children>
 				<HBox layoutX="14.0" layoutY="105.0" prefHeight="100.0" prefWidth="915.0" spacing="81.0">
 					<children>
@@ -186,9 +186,9 @@
             </Button>
 			</children>
 		</Pane>
-		<Pane fx:id="pFoodRegisterForm" layoutX="17.0" layoutY="127.0" prefHeight="566.0" prefWidth="900.0" visible="false">
+		<Pane fx:id="pFoodRegisterForm" layoutX="17.0" layoutY="127.0" prefHeight="566.0" prefWidth="900.0">
 			<children>
-				<VBox layoutX="308.0" layoutY="63.0" prefHeight="467.0" prefWidth="381.0" spacing="10.0">
+				<VBox layoutX="308.0" layoutY="63.0" prefHeight="487.0" prefWidth="381.0" spacing="10.0">
 					<children>
 						<Label text="Formulario para regitro de alimentos">
 							<font>
@@ -212,7 +212,7 @@
 						<TextField fx:id="tfServiceName" promptText="p. ej., Gallo Pinto" />
 						<Label text="Precio del servicio" />
 						<TextField fx:id="tfPriceService" promptText="p. ej., 2500" />
-                  <Label fx:id="lError" prefHeight="100.0" prefWidth="361.0" textFill="#fc2525" />
+                  <Label fx:id="lError" prefHeight="110.0" prefWidth="360.0" textFill="#fc2525" />
 						<HBox prefHeight="72.0" prefWidth="170.0" spacing="134.0">
 							<children>
 								<Button fx:id="btnRegisterService" mnemonicParsing="false" onAction="#handleRegisterService" prefHeight="25.0" prefWidth="94.0" text="Registrar" />
