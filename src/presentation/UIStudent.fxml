@@ -42,7 +42,7 @@
 					<children>
 						<HBox prefHeight="60.0" prefWidth="1005.0" spacing="30.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #9ca3af, #f9fafb);" styleClass="border-bottom" stylesheets="@../business/application.css">
 							<children>
-								<Button fx:id="btnAddStudent" mnemonicParsing="false" onAction="#HandleAddPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Agregar" textFill="#1e1e1e">
+								<Button fx:id="btnAddStudent" mnemonicParsing="false" onAction="#handleAddPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Agregar" textFill="#1e1e1e">
 									<font>
 										<Font name="System Bold" size="13.0" />
 									</font>
@@ -80,21 +80,6 @@
 										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
 											<image>
 												<Image url="@../images/icons8-search-contacts-26.png" />
-											</image>
-										</ImageView>
-									</graphic>
-									<cursor>
-										<Cursor fx:constant="HAND" />
-									</cursor>
-								</Button>
-								<Button fx:id="btnShowAll" mnemonicParsing="false" onAction="#handleShowPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Mostrar ">
-									<font>
-										<Font name="System Bold" size="13.0" />
-									</font>
-									<graphic>
-										<ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@../images/icons8-show-property-26.png" />
 											</image>
 										</ImageView>
 									</graphic>

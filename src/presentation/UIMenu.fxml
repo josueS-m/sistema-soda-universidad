@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,20 +9,50 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.UIMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="612.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="business.UIMenuController">
    <children>
-      <Pane prefHeight="69.0" prefWidth="600.0" style="-fx-background-color: #fff4e6;">
+      <Pane prefHeight="406.0" prefWidth="600.0">
          <children>
-            <Label layoutX="38.0" layoutY="12.0" text="SISTEMA DE SODA UNIVERSIDAD NACIONAL" textFill="#801010">
-               <font>
-                  <Font name="Rockwell Condensed" size="36.0" />
-               </font>
-            </Label>
+            <Pane layoutX="2.0" layoutY="3.0" prefHeight="400.0" prefWidth="300.0" stylesheets="@../business/application.css">
+               <children>
+                  <Label layoutX="46.0" layoutY="34.0" prefHeight="262.0" prefWidth="205.0" styleClass="pane-shadow" stylesheets="@../business/application.css" text="SISTEMA DE SODA UNIVERSIDAD NACIONAL" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Rockwell Condensed" size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="pane-shadow" />
+                  <String fx:value="pane-gradient" />
+               </styleClass>
+            </Pane>
+            <Pane layoutX="298.0" layoutY="3.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #f5f5f5;" styleClass="pane-shadow" stylesheets="@../business/application.css">
+               <children>
+                  <VBox layoutX="76.0" layoutY="79.0" prefHeight="200.0" prefWidth="144.0" spacing="35.0">
+                     <children>
+                        <Button fx:id="btnStudentMenu" mnemonicParsing="false" onAction="#handleUIStudent" styleClass="menu-button" stylesheets="@../business/application.css" text="Estudiantes">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnServiceMenu" mnemonicParsing="false" onAction="#handleUIService" styleClass="menu-button" stylesheets="@../business/application.css" text="Servicios">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnRechargeMenu" mnemonicParsing="false" onAction="#handleUIRecharge" styleClass="menu-button" stylesheets="@../business/application.css" text="Recargas">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="13.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </Pane>
          </children>
       </Pane>
-      <VBox layoutX="2.0" layoutY="70.0" prefHeight="30.0" prefWidth="595.0" />
-      <Button fx:id="btnStudentMenu" layoutX="274.0" layoutY="138.0" mnemonicParsing="false" onAction="#handleUIStudent" text="Estudiantes" />
-      <Button fx:id="btnServiceMenu" layoutX="281.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleUIService" text="Servicios" />
-      <Button fx:id="btnRechargeMenu" layoutX="280.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleUIRecharge" text="Recargas" />
    </children>
 </AnchorPane>

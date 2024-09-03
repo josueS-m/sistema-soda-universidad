@@ -60,6 +60,24 @@
             								<Cursor fx:constant="HAND" />
             							</cursor>
             						</Button>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackPane" prefHeight="34.0" prefWidth="101.0" style="-fx-background-radius: 10px; -fx-background-color: #fff;" text="Regresar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView disable="true" fitHeight="26.0" fitWidth="47.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-return-24.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
 				</HBox>
 			</children>
@@ -140,7 +158,7 @@
 					<columns>
 						<TableColumn fx:id="tcServiceName" prefWidth="428.0" text="Alimento" />
 						<TableColumn fx:id="tcServicePrice" prefWidth="102.0" text="Precio" />
-						<TableColumn fx:id="tcSelectService" prefWidth="96.0" text="Solicitar" />
+						<TableColumn prefWidth="96.0" text="Solicitar" />
 					</columns>
 				</TableView>
 				<Separator layoutX="15.0" layoutY="206.0" prefWidth="900.0" />
@@ -186,7 +204,7 @@
             </Button>
 			</children>
 		</Pane>
-		<Pane fx:id="pFoodRegisterForm" layoutX="17.0" layoutY="127.0" prefHeight="566.0" prefWidth="900.0">
+		<Pane fx:id="pFoodRegisterForm" layoutX="17.0" layoutY="127.0" prefHeight="566.0" prefWidth="900.0" visible="false">
 			<children>
 				<VBox layoutX="308.0" layoutY="63.0" prefHeight="487.0" prefWidth="381.0" spacing="10.0">
 					<children>

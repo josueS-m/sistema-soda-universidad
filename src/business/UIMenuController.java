@@ -17,8 +17,8 @@ public class UIMenuController {
 	@FXML
 	private Button btnServiceMenu;
 	@FXML
-	private Button btnRechargeMenu;
-    
+	private Button btnRechargeMenu;    
+	
 	@FXML
 	public void handleUIStudent(ActionEvent event) {
 		try {

@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import data.LogicControllerStudent;
+import data.Logic;
 import data.ServiceData;
 import data.StudentData;
 import domain.Service;
@@ -40,6 +40,8 @@ public class UIServiceController {
 	private Button btnAddService;
 	@FXML
 	private Button btnServiceRequest;
+	@FXML
+	private Button btnBack;
 	@FXML
 	private Pane pRequestFoodService;
 	@FXML
@@ -88,11 +90,14 @@ public class UIServiceController {
 	private Button btnRegisterService;
 	@FXML
 	private Button btnBackToRequest;
+	@FXML
+	private Button btnConfirmService;
 	
 	@FXML
 	private ObservableList<String> daysList = FXCollections.observableArrayList(
             "Lunes", "Martes", "Miércoles", "Jueves", "Viernes");
 		
+	//Inicializa los comboBox para gardar al instante
 	@FXML
 	public void initialize() {
 	    cxServiceDay.setItems(daysList);
@@ -100,8 +105,11 @@ public class UIServiceController {
 	    loadStudents();
 	}
 	
+	//Carga los estudiantes 
+	@FXML
 	public void loadStudents() {
 		List<Student> students = StudentData.getStudentList();
+		
 	    ObservableList<String> studentList = FXCollections.observableArrayList();
 	    for (Student student : students) {
 	        studentList.add(student.getIdStudent() + " - " + student.getName());
@@ -109,6 +117,7 @@ public class UIServiceController {
 	    cxStudent.setItems(studentList);	    
     }
 	
+	//Carga los servicios en la tabla
 	@FXML
 	public void loadServices(ActionEvent event) {
 		String selectedDay = cxReservationDay.getValue();
@@ -119,27 +128,52 @@ public class UIServiceController {
 		List<Service> services = ServiceData.getServicesByDayAndSchedule(selectedDay, schedule);
 		tvDataNewServiceStudent.getItems().setAll(services);  
 	}
-
-
-	// Event Listener on Button[#btnAddService].onAction
+	
+	//método para los agregar los datos al comboBox
+	@FXML
+	public void fillCXGender(Event event) {
+		Logic.fillCBox(cxServiceDay, daysList);
+	}
+		
 	@FXML
 	public void handleAddRegisterPane(ActionEvent event) {
 		hideAllPanes();
 		pFoodRegisterForm.setVisible(true);
 	}
-	// Event Listener on Button[#btnServiceRequest].onAction
+	
 	@FXML
 	public void handleServiceRequest(ActionEvent event) {
 		hideAllPanes();
 	    pRequestFoodService.setVisible(true);    	   
 	}
-
-	// Event Listener on Button[#btnBackMenu].onAction
+	
 	@FXML
 	public void handleBackMenu(ActionEvent event) {
 		closeWindows();		
 	}
-	// Event Listener on Button[#btnDeleteFoodService].onAction
+	
+	@FXML
+	public void handleBackPane(ActionEvent event) {
+		closeWindows();		
+	}
+	
+	@FXML
+	public void handleAddFoodService(ActionEvent event) {
+		hideAllPanes();
+	    pFoodRegisterForm.setVisible(true);
+	}
+	
+	@FXML
+	public void handleBackRequest(ActionEvent event) {
+		hideAllPanes();
+		pRequestFoodService.setVisible(true);
+	}
+	
+	@FXML
+	public void handleShowDataSelect(ActionEvent event) {		
+		loadServices(event);		
+	}
+	
 	@FXML
 	public void handleDeleteFoodService(ActionEvent event) {
 		
@@ -157,10 +191,12 @@ public class UIServiceController {
 	        notify("Error al eliminar el servicio.");
 	    }
 	}
-	// Event Listener on Button[#btnEditFoodService].onAction
+	
 	@FXML
 	public void handleEditFoodService(ActionEvent event) {
+		
 		Service selectedService = tvDataNewServiceStudent.getSelectionModel().getSelectedItem();
+		
 	    if (selectedService == null) {
 	        notify("Por favor, seleccione un servicio para editar.");
 	        return;
@@ -173,44 +209,42 @@ public class UIServiceController {
 	    selectedService.setPrice(newPrice);
 
 	    boolean success = ServiceData.editService(selectedService);
+	    
 	    if (success) {
-	        tvDataNewServiceStudent.refresh(); // Refrescar la vista de la tabla
+	        tvDataNewServiceStudent.refresh(); 
 	        notify("Servicio editado exitosamente.");
 	    } else {
 	        notify("Error al editar el servicio.");
 	    }
 	}
-	// Event Listener on Button[#btnAddFood].onAction
-	@FXML
-	public void handleAddFoodService(ActionEvent event) {
-		hideAllPanes();
-	    pFoodRegisterForm.setVisible(true);
-	}
-	
+		
+	//Método que reemplaza a solicitar
 	@FXML
 	public void handleConfirmService(ActionEvent event) {
-		// Obtener el servicio seleccionado
+		
 	    Service selectedService = tvDataNewServiceStudent.getSelectionModel().getSelectedItem();
+	    
 	    if (selectedService == null) {
 	    	notifyWithDialog("Por favor, seleccione un servicio para solicitar.");
 	        return;
 	    }
 
-	    // Obtener el estudiante seleccionado
+	    // Obtiene el estudiante seleccionado
 	    String selectedStudentId = cxStudent.getValue().split(" - ")[0];
 	    Student student = StudentData.getStudentById(selectedStudentId);
+	    
 	    if (student == null) {
 	    	notifyWithDialog("Estudiante no encontrado.");
 	        return;
 	    }
 
-	    // Validar si el estudiante tiene suficiente saldo
+	    //  Validacion del saldo del estudiante
 	    if (student.getMoneyAvailable() < selectedService.getPrice()) {
 	    	notifyWithDialog("Saldo insuficiente para realizar la compra.");
 	        return;
 	    }
 
-	    // Actualizar el saldo del estudiante
+	    // Actualiza el saldo del estudiante
 	    double nuevoSaldo = student.getMoneyAvailable() - selectedService.getPrice();
 	    student.setMoneyAvailable(nuevoSaldo);
 	    boolean updateSuccess = StudentData.updateStudentBalance(student);
@@ -222,31 +256,37 @@ public class UIServiceController {
 	    }
 	}
 	
-	// Event Listener on Button[#btnRegisterService].onAction	
+	//manejo del registro de servicios
 	@FXML
 	public boolean handleRegisterService(ActionEvent event) {
-		
-		String messageError = formValidation();
-
+	    	    
+	    String messageError = validationServiceForm();
+	    
 	    if (!messageError.isEmpty()) {
 	        lError.setText(messageError);
 	        return false;
 	    }
 
+	    // Obtiene los datos del servicio
 	    String serviceName = tfServiceName.getText();
 	    double price = Double.parseDouble(tfPriceService.getText());
 	    String day = cxServiceDay.getValue();
 	    String schedule = rbBreakfast.isSelected() ? "Desayuno" : "Almuerzo";
-
+	    
 	    Service newService = new Service(serviceName, price, day, schedule);
-
+	    
+	    String confirmMessage = String.format(
+	            "¿Estás seguro que quieres registrar el servicio '%s' para el día %s al horario %s?",
+	            serviceName, day, schedule);
+	   
 	    Object[] options = {"Continuar", "Cancelar"};
+	    
 	    int confirmOption = JOptionPane.showOptionDialog(
-	            null, "¿Estás seguro que quieres registrar el servicio?", 
+	            null, confirmMessage, 
 	            "Confirmación", JOptionPane.DEFAULT_OPTION, 
 	            JOptionPane.PLAIN_MESSAGE, null, 
 	            options, options[0]);
-
+	   
 	    if (confirmOption == 0) {
 	        if (ServiceData.saveService(newService)) {
 	            notify("¡Servicio registrado exitosamente!");
@@ -257,22 +297,10 @@ public class UIServiceController {
 	    } else {
 	        notify("Se canceló el proceso.");
 	    }
-
 	    return true;
 	}
-	// Event Listener on Button[#btnBackToRequest].onAction
-	@FXML
-	public void handleBackRequest(ActionEvent event) {
-		hideAllPanes();
-		pRequestFoodService.setVisible(true);
-	}
-	
-	@FXML
-	public void handleShowDataSelect(ActionEvent event) {		
-		loadServices(event);		
-	}
-	
-	public String formValidation() {
+		
+	public String validationServiceForm() {
         StringBuilder messageError = new StringBuilder();
 
         if (tfServiceName.getText().isEmpty()) {
@@ -303,6 +331,7 @@ public class UIServiceController {
         return messageError.toString();
     }
 	
+	///Notificaciones en el label
 	public void notify(String message) {
 		lError.setText(message);
 		Timeline timeline = new Timeline(
@@ -313,6 +342,8 @@ public class UIServiceController {
 		timeline.setCycleCount(1);
 		timeline.play();
 	}
+	
+	//notificaciones por cuadro de dialogo
 	public void notifyWithDialog(String message) {
 	    JOptionPane.showMessageDialog(null, message, "Notificación", JOptionPane.INFORMATION_MESSAGE);
 	}
@@ -339,12 +370,7 @@ public class UIServiceController {
 	public void hideAllPanes() {
 	    pFoodRegisterForm.setVisible(false);
 	    pRequestFoodService.setVisible(false);		    
-	}
-	
-	@FXML
-	public void fillCXGender(Event event) {
-		LogicControllerStudent.fillCBox(cxServiceDay, daysList);
-	}
+	}	
 	
 	public void cleanForm() {
         tfServiceName.clear();

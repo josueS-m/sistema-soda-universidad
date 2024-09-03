@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 
 import javax.swing.JOptionPane;
 
-import data.LogicControllerStudent;
+import data.Logic;
 import data.StudentData;
 import domain.Student;
 import javafx.animation.KeyFrame;
@@ -140,10 +140,17 @@ public class UIStudentController {
 		tvDataStudent.refresh();
         loadStudentList();
     }
+	
+	@FXML
+	public void hideAllPanes() {
+	    pAddStudent.setVisible(false);
+	    pEditStudent.setVisible(false);	    
+	    pConsultStudent.setVisible(false);    
+	}
 			
 	// Botones para las distintas ventanas  
 	@FXML
-	public void HandleAddPane(ActionEvent event) {
+	public void handleAddPane(ActionEvent event) {
 		hideAllPanes();
 	    pAddStudent.setVisible(true);
 	}	
@@ -164,7 +171,7 @@ public class UIStudentController {
 	@FXML
 	public void handleConsultPane(ActionEvent event) {
 		hideAllPanes();
-	    pConsultStudent.setVisible(true);
+	    pConsultStudent.setVisible(true);	    
 	}	
 	@FXML
 	public void handleBack(ActionEvent event) {	   
@@ -175,10 +182,15 @@ public class UIStudentController {
 		
 	}
 	
+	@FXML
+	public void fillCXGender(Event event) {
+		Logic.fillCBox(cxGender, genderList);
+	}
 	
 	// Agregar estudiante
 	@FXML
 	public boolean handleAddStudent(ActionEvent event) {
+		
 		String messageError = formValidation();
 		String idStudentValidation = tfIdStudent.getText();
 		
@@ -216,7 +228,8 @@ public class UIStudentController {
 				options, options[0]);
 		
 		if(confirmOption == 0) {
-			if(StudentData.saveStudent(student)) {				
+			if(StudentData.saveStudent(student)) {	
+				tvDataStudent.refresh();
 				notify("¡Registro exitoso!");
 				cleanForm();				
 			} else {
@@ -237,8 +250,9 @@ public class UIStudentController {
 	    if (searchQuery.isEmpty()) {	       
 	        tvDataStudent.setItems(FXCollections.observableArrayList(StudentData.getStudentList()));	        
 	    } else {
-	        // Encontrar estudiante con el ID 
+	        // Encontrar estudiante con el carné 
 	        ObservableList<Student> filteredList = FXCollections.observableArrayList();
+	        
 	        for (Student student : StudentData.getStudentList()) {
 	            if (student.getIdStudent().equalsIgnoreCase(searchQuery)) {
 	                filteredList.add(student);
@@ -246,11 +260,9 @@ public class UIStudentController {
 	            }
 	        }
 
-	        if (filteredList.isEmpty()) {
-	            // Si no se encontró ningún estudiante, mostrar un mensaje
+	        if (filteredList.isEmpty()) {	           
 	            JOptionPane.showMessageDialog(null, "No se encontró ningún estudiante con el ID proporcionado.", "Información", JOptionPane.INFORMATION_MESSAGE);
-	        } else {
-	            // Si se encontró el estudiante, se muestra en la tabla
+	        } else {	            
 	            tvDataStudent.setItems(filteredList);
 	        }
 	    }
@@ -259,15 +271,14 @@ public class UIStudentController {
 	//Editar estudiante
 	@FXML
 	public void handleEditStudent() {
-		 // Obtener el estudiante seleccionado
+		 
 	    Student selectedStudent = tvDataStudent.getSelectionModel().getSelectedItem();
 
 	    if (selectedStudent == null) {
 	        JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún estudiante para editar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 	        return;
 	    }
-
-	    // Actualizar los datos del estudiante con la información del formulario de edición
+	    
 	    selectedStudent.setName(tfNameEdit.getText());
 	    selectedStudent.setEmail(tfEmailEdit.getText());
 	    selectedStudent.setTelephone(Integer.parseInt(tfTelephoneEdit.getText()));
@@ -277,9 +288,9 @@ public class UIStudentController {
 	    selectedStudent.setMoneyAvailable(Double.parseDouble(tfMoneyAvailableEdit.getText()));
 	    boolean isActive = rbActiveEdit.isSelected();
 	    selectedStudent.setActive(isActive);
-
-	    // Confirmar la edición
+	    
 	    Object[] options = {"Continuar", "Cancelar"};
+	    
 	    int confirmOption = JOptionPane.showOptionDialog(
 	            null, "¿Estás seguro que quieres guardar los cambios en el estudiante?", 
 	            "Confirmación", JOptionPane.DEFAULT_OPTION, 
@@ -288,8 +299,7 @@ public class UIStudentController {
 
 	    if (confirmOption == 0) {
 	        
-	        if (StudentData.editStudent(selectedStudent)) {
-	            // Actualizar la tabla
+	        if (StudentData.editStudent(selectedStudent)) {	            
 	            tvDataStudent.refresh();
 	            JOptionPane.showMessageDialog(null, "¡Edición exitosa!");
 	        } else {
@@ -329,17 +339,12 @@ public class UIStudentController {
 	            JOptionPane.showMessageDialog(null, "No se pudo eliminar el estudiante seleccionado.");
 	        }
 	    }
-	}
-
+	}	
 	
-	@FXML
-	public void fillCXGender(Event event) {
-		LogicControllerStudent.fillCBox(cxGender, genderList);
-	}
-	
+	//carga lista de estudiantes a la tabla
 	@FXML
 	public void loadStudentList() {
-		// Configura las propiedades para mostrar los datos de cada columna
+		tvDataStudent.refresh();
 	    tcIdStudent.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdStudent()));
 	    tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 	    tcEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
@@ -355,14 +360,7 @@ public class UIStudentController {
 	    
 	    tvDataStudent.getItems().setAll(StudentData.getStudentList());
 	}
-	
-	@FXML
-	public void hideAllPanes() {
-	    pAddStudent.setVisible(false);
-	    pEditStudent.setVisible(false);	    
-	    pConsultStudent.setVisible(false);    
-	}
-			
+				
 	//Validaciones y requerimientos 
 	@FXML
 	public String formValidation() {
@@ -442,9 +440,6 @@ public class UIStudentController {
 	        }
 	    }
 	}
-
-
-
 	
 	public void notify(String message) {
 		lError.setText(message);

@@ -13,6 +13,7 @@ public class StudentData {
 
 	public static List<Student> studentList = new ArrayList<>();
 
+	//Obtiene la lista de estudiantes del archivo
 	public static List<Student> getStudentList() {
 		try {
 			return jsonUtils.getElements(Student.class);
@@ -30,6 +31,7 @@ public class StudentData {
                "\nDinero disponible: " + student.getMoneyAvailable();
     }
 	
+	// Guarda un nuevo estudiante en el archivo 
 	public static boolean saveStudent(Student student) {
 		try {
 			jsonUtils.saveElement(student);
@@ -40,6 +42,7 @@ public class StudentData {
 		return false;
 	}
 	
+	// Edita la información de un estudiante existente en el archivo 
 	public static boolean editStudent(Student student) {
 		try {
 			jsonUtils.editElements(student);
@@ -50,6 +53,7 @@ public class StudentData {
 		return false;
 	}
 	
+	// Elimina un estudiante del archivo 
 	public static boolean deleteStudent(Student student) {
 		try {
 			jsonUtils.removeElement(student);
@@ -60,6 +64,7 @@ public class StudentData {
 		return false;
 	}
 	
+	// Verifica si existe un estudiante en una lista dada por su carné
 	public static boolean issetStudentByIdStudent(String idStudent, List<Student> studentList) {
 		for(Student s : studentList) {
 			if(s.getIdStudent().equals(idStudent)) {
@@ -67,8 +72,9 @@ public class StudentData {
 			}
 		}
 		return false;
-	}
+	}	
 	
+	// Obtiene un estudiante por su carné desde el archivo 
 	public static Student getStudentById(String idStudent) {
 	    List<Student> students = getStudentList();
 	    for (Student student : students) {
@@ -79,6 +85,7 @@ public class StudentData {
 	    return null; 
 	}
 	
+	// Actualiza el saldo de un estudiante en el archivo 
 	public static boolean updateStudentBalance(Student updatedStudent) {
         List<Student> students = getStudentList();
         

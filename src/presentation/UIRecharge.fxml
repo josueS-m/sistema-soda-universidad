@@ -20,9 +20,9 @@
    <children>
       <Pane layoutX="10.0" layoutY="65.0" prefHeight="52.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #9ca3af, #f9fafb);" styleClass="border-bottom" stylesheets="@../business/application.css">
          <children>
-            <HBox layoutX="21.0" layoutY="1.0" prefHeight="50.0" prefWidth="327.0" spacing="20.0">
+            <HBox layoutX="21.0" layoutY="1.0" prefHeight="50.0" prefWidth="415.0" spacing="20.0">
                <children>
-                  <Button fx:id="btnAddStudent3" mnemonicParsing="false" onAction="#handleRechargePane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Recargar" textFill="#1e1e1e">
+                  <Button fx:id="btnRechargePane" mnemonicParsing="false" onAction="#handleRechargePane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Recargar" textFill="#1e1e1e">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -37,7 +37,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="btnAddStudent" mnemonicParsing="false" onAction="#handleConsultPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Consultar Saldo" textFill="#1e1e1e">
+                  <Button fx:id="btnConsultBalancePane" mnemonicParsing="false" onAction="#handleConsultPane" style="-fx-background-color: #f7fee7;" styleClass="border-bottom" stylesheets="@../business/application.css" text="Consultar Saldo" textFill="#1e1e1e">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -51,6 +51,24 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                  </Button>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackPane" prefHeight="34.0" prefWidth="101.0" style="-fx-background-radius: 10px; -fx-background-color: #fff;" text="Regresar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView disable="true" fitHeight="26.0" fitWidth="47.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons8-return-24.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Button>
                </children>
                <padding>
@@ -118,7 +136,7 @@
       </Pane>
       <Pane fx:id="pRechargeRegister" layoutX="200.0" layoutY="169.0" prefHeight="362.0" prefWidth="520.0" visible="false">
          <children>
-            <VBox layoutX="119.0" layoutY="81.0" prefHeight="200.0" prefWidth="282.0">
+            <VBox layoutX="119.0" layoutY="81.0" prefHeight="269.0" prefWidth="282.0">
                <children>
                   <Label text="Carné de estudiante" />
                   <TextField fx:id="tfIdStudentRecharge" promptText="Ingresar el carné del estudiante" />
@@ -126,6 +144,16 @@
                   <TextField fx:id="tfAmount" promptText="Ingresar monto a recargar" />
                   <Label text="Fecha de recarga" />
                   <DatePicker fx:id="dpRechargeDate" prefHeight="25.0" prefWidth="192.0" promptText="Seleccionar fecha de recarga" />
+                  <Label fx:id="lErrors" prefHeight="66.0" prefWidth="280.0" textFill="#fc1818" />
+                  <HBox prefHeight="35.0" prefWidth="171.0" spacing="106.0">
+                     <children>
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackToConsult" text="Regresar" />
+                        <Button fx:id="btnAddRecharge" mnemonicParsing="false" onAction="#handleAddRecharge" text="Agregar recarga" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </HBox>
                </children>
             </VBox>
             <Label layoutX="150.0" layoutY="14.0" text="Registro de recarga">
@@ -133,12 +161,6 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <HBox layoutX="215.0" layoutY="252.0" prefHeight="35.0" prefWidth="186.0" spacing="20.0">
-               <children>
-                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackToConsult" text="Regresar" />
-                  <Button fx:id="btnAddRecharge" mnemonicParsing="false" onAction="#handleAddRecharge" text="Agregar recarga" />
-               </children>
-            </HBox>
          </children>
       </Pane>
    </children>

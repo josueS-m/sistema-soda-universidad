@@ -8,6 +8,9 @@ public class Recharge {
 	private double amount;
 	private LocalDate rechargeDate;
 	
+	public Recharge() {
+    }
+	
 	public Recharge(String idStudent, double amount, LocalDate rechargeDate) {
 		super();
 		this.idStudent = idStudent;
@@ -45,6 +48,4 @@ public class Recharge {
 				+ getRechargeDate();
 	}
 	
-	
-
 }
